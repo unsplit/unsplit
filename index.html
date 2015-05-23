@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <script src="http://sheltaa5.miniserver.com/mw/projects/framework/select.php?core,handlebars"></script>
+  <script>
+  $(document).ready(function(){
+
+      $(".buttonToClick").click(function(e) {
+        var data = e.timeStamp,
+            html = "<div>{{data}}</div>";
+
+        $("#container").handleBars(data, html);
+      });
+
+  });
+  </script>
+</head>
+<body class="hello">
+  <button class="buttonToClick">click me!</button>
+  <div id="container">
+    
+  </div>  
+</body>
+</html>
