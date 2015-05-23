@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <script src="select.php?core,handlebars"></script>
+  <script>
+  $(document).ready(function(){
+
+      $(".buttonToClick").click(function(e) {
+
+        $("#container").handlebars({
+          data: e.timeStamp,
+          template: "<div>{{data}}</div>"
+        });
+
+      });
+
+  });
+  </script>
+</head>
+<body class="hello">
+  <button class="buttonToClick">click me!</button>
+  <div id="container">
+
+  </div>  
+</body>
+</html>
