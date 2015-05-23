@@ -10,10 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "grunt": "^0.4.5",
-<<<<<<< HEAD
     "grunt-cli": "^0.1.13",
-=======
->>>>>>> d4c5e1f0e6675fb6fc21365d4545f42d353cd2d3
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-contrib-watch": "^0.6.1"
