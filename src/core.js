@@ -4,7 +4,13 @@ function $(element) {
     } else {
         $element.selected = element;
     }
+<<<<<<< HEAD
     if(typeof Handlebars !== "undefined"){}
+=======
+
+    if(typeof Handlebars !== "undefined"){}
+
+>>>>>>> d4c5e1f0e6675fb6fc21365d4545f42d353cd2d3
     return $element;
 }
 
@@ -50,6 +56,10 @@ var $element = {
     html: function (newHTML) {
         if(newHTML) {
             var currentClass = this.selected.attributes.class.nodeValue;
+<<<<<<< HEAD
+=======
+
+>>>>>>> d4c5e1f0e6675fb6fc21365d4545f42d353cd2d3
             this.selected.innerHTML = newHTML;
             return this;
         } else {
@@ -59,6 +69,10 @@ var $element = {
     addClass: function (newClass) {
         for (i = 0; i < this.selected.attributes.length; i++) {
             var attribute = this.selected.attributes[i];
+<<<<<<< HEAD
+=======
+
+>>>>>>> d4c5e1f0e6675fb6fc21365d4545f42d353cd2d3
             if (attribute.name === "class" && attribute.value !== "") {
                 attribute.value += " " + newClass;
             }
@@ -68,6 +82,10 @@ var $element = {
     removeClass: function (deleteClass) {
         for (i = 0; i < this.selected.attributes.length; i++) {
             var attribute = this.selected.attributes[i];
+<<<<<<< HEAD
+=======
+
+>>>>>>> d4c5e1f0e6675fb6fc21365d4545f42d353cd2d3
             if (attribute.name === "class" && attribute.value !== "") {
                 attribute.value = "";
             }
@@ -107,10 +125,15 @@ var $element = {
         })();
     },
     ga: function(category, label, value) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> d4c5e1f0e6675fb6fc21365d4545f42d353cd2d3
         //ga('send', 'event', category, 'click', label, value);
         console.log("send", "event", category, "click", label, value);
         return this;
     },
+<<<<<<< HEAD
     handlebars: function(input, template) {
        if(typeof input !== "object") {
             if(template) {
@@ -130,3 +153,14 @@ var $element = {
         return this;
     }
 };
+=======
+    handleBars: function(data, html) {
+
+       compiled = Handlebars.compile(html);
+
+       this.selected.innerHTML += compiled({ data: data });
+
+       return this;
+    }
+};
+>>>>>>> d4c5e1f0e6675fb6fc21365d4545f42d353cd2d3
