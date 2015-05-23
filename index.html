@@ -2,8 +2,7 @@
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <script src="select.php?core,handlebars"></script>
-  <script src="http://sheltaa5.miniserver.com/mw/projects/framework/select.php?core,handlebars"></script>
+  <script src="http://unspl.it/generator/generator.php?core,http,handlebars"></script>
   <script>
   $(document).ready(function(){
 
@@ -17,7 +16,7 @@
         var data = e.timeStamp,
             html = "<div>{{data}}</div>";
 
-        $("#container").handleBars(data, html);
+        $("#container").handlebars(data, html);
 
       });
 
