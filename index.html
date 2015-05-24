@@ -8,23 +8,12 @@
 
       $(".buttonToClick").click(function(e) {
 
-      /*  $("#container").handlebars({
-          data: e.timeStamp,
-          template: "<div>{{data}}</div>"
-        });
-
-        var data = e.timeStamp,
-            html = "<div>{{data}}</div>";
-
-        $("#container").handlebars(data, html);*/
-
         $ajax.get("http://www.unspl.it/unsplit/package.json").success(function(data){
 
-           console.log(data.name);
-         
-        });
+           var html = "<div>{{name}}</div>";
+           $("#container").handlebars(data, html);
 
-      //console.log($ajax.get("geuivji"));
+        });
 
       });
 
