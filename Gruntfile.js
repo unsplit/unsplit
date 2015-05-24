@@ -1,6 +1,9 @@
 module.exports = function(grunt) {
 
- var fileOrder = ['src/core.js', 'src/*/*.js'];
+ var fileOrder = [
+    'src/core.js',
+    'src/components/ajax.js'
+ ];
 
  grunt.initConfig({
    concat: {
