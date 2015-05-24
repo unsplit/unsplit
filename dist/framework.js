@@ -7,13 +7,27 @@ function $(element) {
     if(typeof Handlebars !== "undefined"){}
     return $element;
 }
-
+var $scope = {};
 var $element = {
     selected: {},
     ready: function(onLoad) {
-        //window.onload = onLoad;
         document.addEventListener("DOMContentLoaded", function(event) {
-           window.onload = onLoad();
+            window.onload = onLoad();
+            var templates = document.querySelectorAll('[data-template]');
+
+            for (i = 0; i < templates.length; i++) {
+                var template = $(templates[i]),
+                    attrs = template.attributes(),
+                    url   = attrs["data-template"].value,
+                    obj   = attrs["data-template-object"].value;
+
+               $ajax.get(url).success(function(contents) {
+                    $scope[obj] = window["$scope"][obj];
+
+                    template.handlebars($scope, contents);
+               });
+            }
+
         });
     },
     attr: function (value, newValue) {
@@ -27,6 +41,9 @@ var $element = {
                 return attribute.value;
             }
         }
+    },
+    attributes: function (value, newValue) {
+        return this.selected.attributes;
     },
     hasClass: function (theClass) {
         for (i = 0; i < this.selected.attributes.length; i++) {
@@ -136,7 +153,6 @@ var $element = {
         return this;
     }
 };
-
 var $ajax = {
     xhr: {},
     get: function(url, async) {
