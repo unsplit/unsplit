@@ -1,12 +1,12 @@
 {
-  "name": "framework",
+  "name": "unsplit",
   "version": "1.0.0",
-  "description": "",
+  "description": "A lightweight framework for rapid development with Javascript.",
   "main": "Gruntfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Michael Wilson",
   "license": "ISC",
   "dependencies": {
     "grunt": "^0.4.5",
