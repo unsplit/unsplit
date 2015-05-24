@@ -120,14 +120,17 @@ var $element = {
                 var compiled = Handlebars.compile(template);
                 this.selected.innerHTML += compiled({ data: input });
             } else {
-                console.log("you have not specified a template");
+                throw new Error("you have not specified a template");
             }
         } else {
             if(/<[a-z][\s\S]*>/i.test(input.template)) {
-            var compiled = Handlebars.compile(input.template);
-            this.selected.innerHTML += compiled({ data: input.data });
+                var compiled = Handlebars.compile(input.template);
+                this.selected.innerHTML += compiled({ data: input.data });
             } else {
+                var handle = Handlebars.compile(template),
+                    html = handle(input);
 
+                this.selected.innerHTML += html;
             }
         }
         return this;
