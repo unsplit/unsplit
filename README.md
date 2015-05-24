@@ -126,6 +126,8 @@ $ajax.get("http://www.unspl.it/unsplit/package.json").success(function(data){
 
 ### $scope
 
+#### initialization
+
 ```javascript
 $(document).ready(function(){
       $scope.games = [{
@@ -133,11 +135,22 @@ $(document).ready(function(){
       }];
 });
 ```
-
+##### HTML:
 ```html
 <div data-template-object="games" data-template="templates/test.html"></div>
 ```
 
+###### templates/test.html
+
+```html
+<div>the name is: {{games.[0].name}}</div>
+
+{{#each games}}
+  {{name}}
+{{/each}}
+```
+
+#### more coming soon!
 
 ## Plugins
 We want to keep the core of unsplit minimal, so you can choose exactly what you need from the framework. Here you will find a list of plugins which are 
