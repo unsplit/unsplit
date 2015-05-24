@@ -9,7 +9,7 @@ module.exports = function(grunt) {
    concat: {
     dist: {
       src: fileOrder,
-      dest: 'dist/framework.js',
+      dest: 'dist/unsplit.js',
     },
    },
    uglify: {
@@ -18,7 +18,7 @@ module.exports = function(grunt) {
      },
      my_target: {
        files: {
-         'dist/framework.min.js': fileOrder
+         'dist/unsplit.min.js': fileOrder
        }
      }
    },
