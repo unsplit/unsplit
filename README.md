@@ -42,3 +42,5 @@ supported within the core:
 | Name | Status | Website | API |
 |-------------|---------------|--------------------------|---------------------------------------|
 |Handlebars | development | http://handlebarsjs.com/ | ```$("#container").handlebars(html)```|
+| Google Analytics | development | [http://developers.google.com](https://developers.google.com/analytics/devguides/collection/analyticsjs/) | ```ga(category, label, value)``` |
+
