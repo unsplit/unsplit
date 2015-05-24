@@ -38,6 +38,6 @@ $(document).ready(function(){
 ## Plugins
 We want to keep the core of unsplit minimal, so you can choose exactly what you need from the framework. Here you will find a list of plugins which are 
 supported within the core:
-| Name | Status | Website | API | -------------|---------------|--------------------------|---------------------------------------| Handlebars | development | 
-| http://handlebarsjs.com/ | ```$("#container").handlebars(html)```|
-| Google Analytics | development | [http://developers.google.com](https://developers.google.com/analytics/devguides/collection/analyticsjs/) | ```ga(category, label, value)``` |
+| Name | Status | Website | API |
+|-------------|---------------|--------------------------|---------------------------------------|
+|Handlebars | development | http://handlebarsjs.com/ | ```$("#container").handlebars(html)```|
