@@ -17,9 +17,9 @@ Download either the minified or un-minifed version from the ```dist``` folder.
 Clone our repository and install the nesecarry modules to build with Grunt (NOTE: You will need to have nodeJS installed):
 
 ```bash
-git clone 
-https://github.com/unsplit/unsplit.git
-cd unsplit && npm install grunt
+git clone https://github.com/unsplit/unsplit.git
+cd unsplit && npm install
+grunt
 ```
 
 To change what is include in the build, edit the ```Gruntfile.js``` and look for the ```fileOrder``` array.
