@@ -6,13 +6,14 @@
   <script>
   $(document).ready(function(){
 
+    var games = [{
+      name: "resident evil"
+    }];
+
       $(".buttonToClick").click(function(e) {
 
         $ajax.get("http://www.unspl.it/unsplit/package.json").success(function(data){
-
-           var html = "<div>{{name}}</div>";
-           $("#container").handlebars(data, html);
-
+           // $("#container").handlebars(data);
         });
 
       });
@@ -22,8 +23,6 @@
 </head>
 <body class="hello">
   <button class="buttonToClick">click me!</button>
-  <div id="container">
-  </div>
+  <div id="container" data-template-object="games" data-template="templates/test.html"></div>
 </body>
 </html>
-

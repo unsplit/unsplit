@@ -11,9 +11,24 @@ function $(element) {
 var $element = {
     selected: {},
     ready: function(onLoad) {
-        //window.onload = onLoad;
         document.addEventListener("DOMContentLoaded", function(event) {
-           window.onload = onLoad();
+            window.onload = onLoad();
+            var templates = document.querySelectorAll('[data-template]');
+
+            for (i = 0; i < templates.length; i++) {
+                var template = $(templates[i]),
+                    attrs = template.attributes(),
+                    url   = attrs["data-template"].value,
+                    obj   = attrs["data-template-object"].value;
+
+                var games = [];
+
+                console.log(window);
+
+               $ajax.get(url).success(function(data) {
+                    $("#container").handlebars({test: "hello"}, data);
+               });
+            }
         });
     },
     attr: function (value, newValue) {
@@ -27,6 +42,9 @@ var $element = {
                 return attribute.value;
             }
         }
+    },
+    attributes: function (value, newValue) {
+        return this.selected.attributes;
     },
     hasClass: function (theClass) {
         for (i = 0; i < this.selected.attributes.length; i++) {
@@ -115,6 +133,7 @@ var $element = {
         return this;
     },
     handlebars: function(input, template) {
+        console.log(this.selected);
        if(typeof input !== "object") {
             if(template) {
                 var compiled = Handlebars.compile(template);
