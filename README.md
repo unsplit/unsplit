@@ -102,7 +102,7 @@ $(".hello").attr("name", "Michael");
 $(".hello").hasClass("there");
 ```
 
-#### .hasClass()
+#### .append()
 Insert text or HTML
 ```javascript
 $(".hello").append("new text");
@@ -111,6 +111,33 @@ $(".hello").append("new text");
 ```javascript
 $(".hello").append("<div><i>new</i> <b>html</b></div>");
 ```
+
+### $ajax
+
+#### .get()
+
+```javascript
+$ajax.get("http://www.unspl.it/unsplit/package.json").success(function(data){
+   // successfully got the json file with automatic json parse
+});
+```
+
+#### more coming soon!
+
+### $scope
+
+```javascript
+$(document).ready(function(){
+      $scope.games = [{
+        name: "resident evil"
+      }];
+});
+```
+
+```html
+<div data-template-object="games" data-template="templates/test.html"></div>
+```
+
 
 ## Plugins
 We want to keep the core of unsplit minimal, so you can choose exactly what you need from the framework. Here you will find a list of plugins which are 
