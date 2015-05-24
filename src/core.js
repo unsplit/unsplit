@@ -7,7 +7,7 @@ function $(element) {
     if(typeof Handlebars !== "undefined"){}
     return $element;
 }
-
+var $scope = {};
 var $element = {
     selected: {},
     ready: function(onLoad) {
@@ -21,14 +21,13 @@ var $element = {
                     url   = attrs["data-template"].value,
                     obj   = attrs["data-template-object"].value;
 
-                var games = [];
+               $ajax.get(url).success(function(contents) {
+                    $scope[obj] = window["$scope"][obj];
 
-                console.log(window);
-
-               $ajax.get(url).success(function(data) {
-                    $("#container").handlebars({test: "hello"}, data);
+                    template.handlebars($scope, contents);
                });
             }
+
         });
     },
     attr: function (value, newValue) {
@@ -133,7 +132,6 @@ var $element = {
         return this;
     },
     handlebars: function(input, template) {
-        console.log(this.selected);
        if(typeof input !== "object") {
             if(template) {
                 var compiled = Handlebars.compile(template);
