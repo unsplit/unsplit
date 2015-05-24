@@ -42,7 +42,7 @@ var $element = {
             }
         }
     },
-    attributes: function (value, newValue) {
+    attributes: function () {
         return this.selected.attributes;
     },
     hasClass: function (theClass) {
@@ -77,11 +77,13 @@ var $element = {
         }
     },
     addClass: function (newClass) {
-        for (i = 0; i < this.selected.attributes.length; i++) {
-            var attribute = this.selected.attributes[i];
-            if (attribute.name === "class" && attribute.value !== "") {
-                attribute.value += " " + newClass;
-            }
+        if (this.selected.getAttribute("class") === null) {
+            var att = document.createAttribute("class");
+                att.value = newClass;
+                this.selected.setAttributeNode(att);
+        } else {
+            var att = this.selected.getAttribute("class") + " " + newClass;
+            this.selected.setAttribute("class", att);
         }
         return this;
     },

@@ -14,10 +14,14 @@
         name: "really does work"
       }];
 
+      $(".hello").addClass("wooo");
+
+      //$("[name=woo]").addClass("second");
+
       $(".buttonToClick").click(function(e) {
 
         $ajax.get("http://www.unspl.it/unsplit/package.json").success(function(data){
-           // $("#container").handlebars(data);
+           // $("#container").handlebars(data);      
         });
 
       });
@@ -29,5 +33,6 @@
   <button class="buttonToClick">click me!</button>
   <div data-template-object="games" data-template="templates/test.html"></div>
     <div id="container" data-template-object="buyit" data-template="templates/another_test.html"></div>
+    <input name="woo"/>
 </body>
 </html>
