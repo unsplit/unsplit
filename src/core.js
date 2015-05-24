@@ -5,14 +5,16 @@ function $(element) {
         $element.selected = element;
     }
     if(typeof Handlebars !== "undefined"){}
-    if(typeof Handlebars !== "undefined"){}
     return $element;
 }
 
 var $element = {
     selected: {},
     ready: function(onLoad) {
-        window.onload = onLoad;
+        //window.onload = onLoad;
+        document.addEventListener("DOMContentLoaded", function(event) {
+           window.onload = onLoad();
+        });
     },
     attr: function (value, newValue) {
         for (i = 0; i < this.selected.attributes.length; i++) {

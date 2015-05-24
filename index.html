@@ -2,13 +2,13 @@
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <script src="http://unspl.it/generator/generator.php?core,http,handlebars"></script>
+  <script src="http://unspl.it/generator/generator.php?core,ajax,handlebars"></script>
   <script>
   $(document).ready(function(){
 
       $(".buttonToClick").click(function(e) {
 
-        $("#container").handlebars({
+      /*  $("#container").handlebars({
           data: e.timeStamp,
           template: "<div>{{data}}</div>"
         });
@@ -16,7 +16,15 @@
         var data = e.timeStamp,
             html = "<div>{{data}}</div>";
 
-        $("#container").handlebars(data, html);
+        $("#container").handlebars(data, html);*/
+
+        $ajax.get("http://www.unspl.it/unsplit/package.json").success(function(data){
+
+           console.log(data.name);
+         
+        });
+
+      //console.log($ajax.get("geuivji"));
 
       });
 
@@ -26,6 +34,7 @@
 <body class="hello">
   <button class="buttonToClick">click me!</button>
   <div id="container">
-  </div>  
+  </div>
 </body>
 </html>
+
