@@ -5,34 +5,18 @@
   <script src="http://unspl.it/generator/generator.php?core,ajax,handlebars"></script>
   <script>
   $(document).ready(function(){
+    $scope.games = [{
+      name: "resident evil"
+    }];
 
-      $scope.games = [{
-        name: "resident evil"
-      }];
-
-      $scope.buyit = [{
-        name: "really does work"
-      }];
-
-      $(".hello").addClass("wooo");
-
-      //$("[name=woo]").addClass("second");
-
-      $(".buttonToClick").click(function(e) {
-
-        $ajax.get("http://www.unspl.it/unsplit/package.json").success(function(data){
-           // $("#container").handlebars(data);      
-        });
-
-      });
-
+    $scope.buyit = [{
+      name: "really does work"
+    }];
   });
   </script>
 </head>
 <body class="hello">
-  <button class="buttonToClick">click me!</button>
   <div data-template-object="games" data-template="templates/test.html"></div>
     <div id="container" data-template-object="buyit" data-template="templates/another_test.html"></div>
-    <input name="woo"/>
 </body>
 </html>
