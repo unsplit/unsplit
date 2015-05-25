@@ -1,18 +1,56 @@
 function $(element) {
+
+    if (!document.querySelectorAll) {
+      document.querySelectorAll = function (selectors) {
+        var style = document.createElement('style'), elements = [], element;
+        document.documentElement.firstChild.appendChild(style);
+        document._qsa = [];
+     
+        style.styleSheet.cssText = selectors + '{x-qsa:expression(document._qsa && document._qsa.push(this))}';
+        window.scrollBy(0, 0);
+        style.parentNode.removeChild(style);
+     
+        while (document._qsa.length) {
+          element = document._qsa.shift();
+          element.style.removeAttribute('x-qsa');
+          elements.push(element);
+        }
+        document._qsa = null;
+        return elements;
+      };
+    }
+     
+    if (!document.querySelector) {
+      document.querySelector = function (selectors) {
+        var elements = document.querySelectorAll(selectors);
+        return (elements.length) ? elements[0] : null;
+      };
+    }
+
     if(typeof element === "string") {
         $element.selected = document.querySelector(element);
     } else {
         $element.selected = element;
     }
+    console.log($element.selected);
     if(typeof Handlebars !== "undefined"){}
     return $element;
 }
+
+var $browser = {
+    belowIE10: function() {
+      return /MSIE\s/.test(navigator.userAgent) && parseFloat(navigator.appVersion.split("MSIE")[1]) < 10;
+    }
+};
+
 var $scope = {};
+
 var $element = {
     selected: {},
     ready: function(onLoad) {
-        document.addEventListener("DOMContentLoaded", function(event) {
-            window.onload = onLoad();
+        window.onload = function() {
+            onLoad();
+
             var templates = document.querySelectorAll('[data-template]');
 
             for (i = 0; i < templates.length; i++) {
@@ -21,14 +59,12 @@ var $element = {
                     url   = attrs["data-template"].value,
                     obj   = attrs["data-template-object"].value;
 
-               $ajax.get(url).success(function(contents) {
+                $ajax.get(url).success(function(contents) {
                     $scope[obj] = window["$scope"][obj];
-
                     template.handlebars($scope, contents);
-               });
+                });
             }
-
-        });
+        }
     },
     attr: function (value, newValue) {
         for (i = 0; i < this.selected.attributes.length; i++) {
@@ -69,7 +105,7 @@ var $element = {
     },
     html: function (newHTML) {
         if(newHTML) {
-            var currentClass = this.selected.attributes.class.nodeValue;
+            console.log(this.selected);
             this.selected.innerHTML = newHTML;
             return this;
         } else {
@@ -134,24 +170,24 @@ var $element = {
         return this;
     },
     handlebars: function(input, template) {
-       if(typeof input !== "object") {
-            if(template) {
-                var compiled = Handlebars.compile(template);
-                this.selected.innerHTML += compiled({ data: input });
+            if(typeof input !== "object") {
+                if(template) {
+                    var compiled = Handlebars.compile(template);
+                    this.selected.innerHTML += compiled({ data: input });
+                } else {
+                    throw new Error("you have not specified a template");
+                }
             } else {
-                throw new Error("you have not specified a template");
-            }
-        } else {
-            if(/<[a-z][\s\S]*>/i.test(input.template)) {
-                var compiled = Handlebars.compile(input.template);
-                this.selected.innerHTML += compiled({ data: input.data });
-            } else {
-                var handle = Handlebars.compile(template),
-                    html = handle(input);
+                if(/<[a-z][\s\S]*>/i.test(input.template)) {
+                    var compiled = Handlebars.compile(input.template);
+                    this.selected.innerHTML += compiled({ data: input.data });
+                } else {
+                    var handle = Handlebars.compile(template),
+                        html = handle(input);
 
-                this.selected.innerHTML += html;
+                    this.selected.innerHTML += html;
+                }
             }
-        }
         return this;
     }
 };

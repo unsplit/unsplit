@@ -24,7 +24,6 @@ var $ajax = {
       function tryParseJSON (jsonString){
         try {
         var o = JSON.parse(jsonString);
-
         // Handle non-exception-throwing cases:
         // Neither JSON.parse(false) or JSON.parse(1234) throw errors, hence the type-checking,
         // but... JSON.parse(null) returns 'null', and typeof null === "object", 
@@ -44,7 +43,7 @@ var $ajax = {
       if(isJSON !== false) {
          funct(isJSON);
       } else {
-         funct(this.xhr.response);
+         funct(this.xhr.responseText);
       }
     }
 };

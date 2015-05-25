@@ -12,10 +12,14 @@
     $scope.buyit = [{
       name: "really does work"
     }];
+
+    $(".test").html("<div>hello there</div>");
+
   });
   </script>
 </head>
 <body class="hello">
+  <div class="test"></div>
   <div data-template-object="games" data-template="templates/test.html"></div>
     <div id="container" data-template-object="buyit" data-template="templates/another_test.html"></div>
 </body>
