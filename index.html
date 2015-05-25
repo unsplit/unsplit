@@ -4,23 +4,21 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <script src="http://unspl.it/generator/generator.php?core,ajax,handlebars"></script>
   <script>
-  $(document).ready(function(){
-    $scope.games = [{
-      name: "resident evil"
-    }];
+    $(document).ready(function(){
+      $scope.games = [{
+        name: "resident evil"
+      }];
 
-    $scope.buyit = [{
-      name: "really does work"
-    }];
-
-    $(".test").html("<div>hello there</div>");
-
-  });
+      $scope.buyit = [{
+        name: "really does work"
+      }];
+    });
   </script>
 </head>
 <body class="hello">
-  <div class="test"></div>
-  <div data-template-object="games" data-template="templates/test.html"></div>
-    <div id="container" data-template-object="buyit" data-template="templates/another_test.html"></div>
+  <h2>First template</h2>
+  <div data-template="templates/test.html"></div>
+  <h2>Second template</h2>
+  <div data-template="templates/another_test.html"></div>
 </body>
 </html>

@@ -137,7 +137,7 @@ $(document).ready(function(){
 ```
 ##### HTML:
 ```html
-<div data-template-object="games" data-template="templates/test.html"></div>
+<div data-template="templates/test.html"></div>
 ```
 
 ###### templates/test.html

@@ -1,38 +1,9 @@
 function $(element) {
-
-    if (!document.querySelectorAll) {
-      document.querySelectorAll = function (selectors) {
-        var style = document.createElement('style'), elements = [], element;
-        document.documentElement.firstChild.appendChild(style);
-        document._qsa = [];
-     
-        style.styleSheet.cssText = selectors + '{x-qsa:expression(document._qsa && document._qsa.push(this))}';
-        window.scrollBy(0, 0);
-        style.parentNode.removeChild(style);
-     
-        while (document._qsa.length) {
-          element = document._qsa.shift();
-          element.style.removeAttribute('x-qsa');
-          elements.push(element);
-        }
-        document._qsa = null;
-        return elements;
-      };
-    }
-     
-    if (!document.querySelector) {
-      document.querySelector = function (selectors) {
-        var elements = document.querySelectorAll(selectors);
-        return (elements.length) ? elements[0] : null;
-      };
-    }
-
     if(typeof element === "string") {
         $element.selected = document.querySelector(element);
     } else {
         $element.selected = element;
     }
-    console.log($element.selected);
     if(typeof Handlebars !== "undefined"){}
     return $element;
 }
@@ -56,11 +27,9 @@ var $element = {
             for (i = 0; i < templates.length; i++) {
                 var template = $(templates[i]),
                     attrs = template.attributes(),
-                    url   = attrs["data-template"].value,
-                    obj   = attrs["data-template-object"].value;
+                    url   = attrs["data-template"].value;
 
                 $ajax.get(url).success(function(contents) {
-                    $scope[obj] = window["$scope"][obj];
                     template.handlebars($scope, contents);
                 });
             }
@@ -105,7 +74,6 @@ var $element = {
     },
     html: function (newHTML) {
         if(newHTML) {
-            console.log(this.selected);
             this.selected.innerHTML = newHTML;
             return this;
         } else {
