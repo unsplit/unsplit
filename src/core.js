@@ -4,7 +4,6 @@ function $(element) {
     } else {
         $element.selected = element;
     }
-    if(typeof Handlebars !== "undefined"){}
     return $element;
 }
 
@@ -30,7 +29,7 @@ var $element = {
                     url   = attrs["data-template"].value;
 
                 $ajax.get(url).success(function(contents) {
-                    template.handlebars($scope, contents);
+                    template.template($scope, contents);
                 });
             }
         }
@@ -137,7 +136,26 @@ var $element = {
         console.log("send", "event", category, "click", label, value);
         return this;
     },
-    handlebars: function(input, template) {
+    template: function(input, template) {
+        if(typeof Handlebars === "undefined") {
+            if(typeof input !== "object") {
+                if(template) {
+                    var complied = Mustache.render(template, {data: input});
+                    //var compiled = Handlebars.compile(template);
+                    this.selected.innerHTML += complied;
+                } else {
+                    throw new Error("you have not specified a template");
+                }
+            } else {
+                if(/<[a-z][\s\S]*>/i.test(input.template)) {
+                    var compiled = Mustache.render(input.template, { data: input.data });
+                    this.selected.innerHTML += compiled;
+                } else {
+                    var handle = Mustache.render(template, input);
+                    this.selected.innerHTML += handle;
+                }
+            }
+        } else {
             if(typeof input !== "object") {
                 if(template) {
                     var compiled = Handlebars.compile(template);
@@ -156,6 +174,7 @@ var $element = {
                     this.selected.innerHTML += html;
                 }
             }
+        }
         return this;
     }
 };

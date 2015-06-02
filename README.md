@@ -29,7 +29,7 @@ We provide a generator for unsplit, which allows you to specify in the url which
 [Generator](http://github.com/unsplit/generator) repository and link through to it or you can link through to ours:
 
 ```html
-<script type="text/javascript" src="http://unspl.it/generator/generator.php?core,ajax,handlebars"></script>
+http://unspl.it/generator/generator.php?core,ajax,handlebars
 ```
 
 ## API

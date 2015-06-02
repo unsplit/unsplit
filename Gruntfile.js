@@ -2,7 +2,8 @@ module.exports = function(grunt) {
 
  var fileOrder = [
     'src/core.js',
-    'src/components/ajax.js'
+    'src/components/ajax.js',
+    'src/plugins/mustache.js'
  ];
 
  grunt.initConfig({
