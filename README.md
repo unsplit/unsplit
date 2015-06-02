@@ -9,7 +9,7 @@ A lightweight framework for rapid development with Javascript.
 Download either the minified or un-minifed version from the ```dist``` folder. 
 
 ```html
-<script type="text/javascript" src="path/to/unsplit.min.js"></script>
+<script type="text/javascript" src="dist/unsplit.min.js"></script>
 ```
 
 #### Grunt
@@ -143,11 +143,9 @@ $(document).ready(function(){
 ###### templates/test.html
 
 ```html
-<div>the name is: {{games.[0].name}}</div>
-
-{{#each games}}
-  {{name}}
-{{/each}}
+{{#games}}
+* {{name}}
+{{/games}}
 ```
 
 #### more coming soon!
@@ -158,6 +156,7 @@ supported within the core:
 
 | Name | Status | Website | API |
 |-------------|---------------|--------------------------|---------------------------------------|
-|Handlebars | development | http://handlebarsjs.com/ | ```$("#container").handlebars(html)```|
+| Mustache | development | http://mustache.github.io/ | ```$("#container").template(html)```|
+| Handlebars | development | http://handlebarsjs.com/ | ```$("#container").template(html)```|
 | Google Analytics | development | [http://developers.google.com](https://developers.google.com/analytics/devguides/collection/analyticsjs/) | ```ga(category, label, value)``` |
 
