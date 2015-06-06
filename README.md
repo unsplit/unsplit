@@ -2,6 +2,7 @@
 
 [![Join the chat at https://gitter.im/unsplit/unsplit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/unsplit/unsplit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/unsplit/unsplit.svg?branch=master)](https://travis-ci.org/unsplit/unsplit)
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 A lightweight framework for rapid development with Javascript.
 
