@@ -1,5 +1,7 @@
 # unsplit
 
+[![unsplit on Gitter](https://img.shields.io/badge/GITTER-join%20chat-green.svg "unsplit on Gitter")](https://gitter.im/unsplit)
+
 A lightweight framework for rapid development with Javascript.
 
 ## Getting started
@@ -14,7 +16,7 @@ Download either the minified or un-minifed version from the ```dist``` folder.
 
 #### Grunt
 
-Clone our repository and install the nesecarry modules to build with Grunt (NOTE: You will need to have nodeJS installed):
+Clone our repository and install the modules to build unsplit with Grunt (NOTE: You will need to have nodeJS installed):
 
 ```bash
 git clone https://github.com/unsplit/unsplit.git
@@ -29,7 +31,7 @@ We provide a generator for unsplit, which allows you to specify in the url which
 [Generator](http://github.com/unsplit/generator) repository and link through to it or you can link through to ours:
 
 ```html
-http://unspl.it/generator/generator.php?core,ajax,handlebars
+http://generator.unspl.it/?core,ajax,handlebars
 ```
 
 ## API
@@ -117,7 +119,7 @@ $(".hello").append("<div><i>new</i> <b>html</b></div>");
 #### .get()
 
 ```javascript
-$ajax.get("http://www.unspl.it/unsplit/package.json").success(function(data){
+$ajax.get("http://www.unspl.it/package.json").success(function(data){
    // successfully got the json file with automatic json parse
 });
 ```
@@ -130,9 +132,9 @@ $ajax.get("http://www.unspl.it/unsplit/package.json").success(function(data){
 
 ```javascript
 $(document).ready(function(){
-      $scope.games = [{
-        name: "resident evil"
-      }];
+   $scope.games = [{
+     name: "resident evil"
+   }];
 });
 ```
 ##### HTML:
