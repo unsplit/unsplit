@@ -119,7 +119,7 @@ $(".hello").append("<div><i>new</i> <b>html</b></div>");
 #### .get()
 
 ```javascript
-$ajax.get("http://www.unspl.it/package.json").success(function(data){
+$ajax.get("http://unspl.it/package.json").success(function(data){
    // successfully got the json file with automatic json parse
 });
 ```
