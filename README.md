@@ -1,6 +1,6 @@
 # unsplit
 
-[![unsplit on Gitter](https://img.shields.io/badge/GITTER-join%20chat-green.svg "unsplit on Gitter")](https://gitter.im/unsplit)
+[![Join the chat at https://gitter.im/unsplit/unsplit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/unsplit/unsplit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A lightweight framework for rapid development with Javascript.
 
