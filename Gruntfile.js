@@ -3,7 +3,7 @@ module.exports = function(grunt) {
  var fileOrder = [
     'src/core.js',
     'src/components/ajax.js',
-    'src/plugins/page.js',
+//    'src/plugins/page.js',
     'src/plugins/mustache.js'
  ];
 

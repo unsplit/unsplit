@@ -71,15 +71,9 @@ var $element = {
                 for (c = 0; c < repeats[i].childNodes.length; c++) {
                     if(repeats[i].childNodes[c].nodeName == repeats[i].nodeName) {
                         if(c === 1) {
-                            //console.log(c);
                             holder = repeats[i].childNodes[c].outerHTML;
-                            //repeats[i].outerHTML += repeats[i].childNodes[c].outerHTML;
-                            //console.log(repeats[i].childNodes[c].outerHTML);
                         } else {
-                            //console.log(c);
-                            //console.log(repeats[i].outerHTML);
                             holder += repeats[i].childNodes[c].outerHTML;
-                            //repeats[i].outerHTML += repeats[i].childNodes[c].outerHTML;
                         }
                     }
                 };
@@ -175,7 +169,8 @@ var $element = {
         return this;
     },
     click: function(toRun) {
-        this.selected.onclick = function() { 
+        this.selected.onclick = function(e) {
+            console.log(e.preventDefault());
             toRun();
         };
         return this;
@@ -221,8 +216,6 @@ var $element = {
         var elem = this.parent().position(),
         nearest = document.elementFromPoint(elem.x, elem.y);
 
-        console.log(nearest.childNodes);
-        //console.log(nearest.insertBefore(document.createElement('div')).textContent='spaghetti');
         return this;
     },
     keypress: function(expression, toRun) {
@@ -239,7 +232,6 @@ var $element = {
 
             if(find && typeof $scope[spl[1][0]] === "function") {  
                 this.selected.onkeypress = function(e) {
-                    console.log(e.keyCode);
                    if (e.keyCode === find.code) {
                         return $scope[spl[1][0]]();
                    }
