@@ -97,7 +97,7 @@ $(".hello").html("New html");
 ```javascript
 var pos = $(".middle").position();
 
-console.log(pos.x, pos.xy);
+console.log(pos.x, pos.y);
 ```
 
 #### .attr()
