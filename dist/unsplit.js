@@ -163,26 +163,41 @@ var $element = {
         console.log("send", "event", category, "click", label, value);
         return this;
     },
-    keypress: function(expression) {
+    keypress: function(expression, toRun) {
         var spl = expression.split(":");
 
-        for (var i = spl.length - 1; i >= 0; i--) {
-            spl[i] = spl[i].replace(/\s+/g, ''); 
-            spl[i] = spl[i].split("(");
-        };
+        if(spl.length > 1) {
+            for (var i = spl.length - 1; i >= 0; i--) {
+                spl[i] = spl[i].replace(/\s+/g, ''); 
+                spl[i] = spl[i].split("(");
+            };
 
-        var term = spl[0][0],
-            find = $events.find(term);
+            var term = spl[0][0],
+                find = $events.find(term);
 
-        if(find && typeof $scope[spl[1][0]] === "function") {  
-            this.selected.onkeypress = function(e) {
-                console.log(e.keyCode);
-               if (e.keyCode === find.code) {
-                    return $scope[spl[1][0]]();
-               }
+            if(find && typeof $scope[spl[1][0]] === "function") {  
+                this.selected.onkeypress = function(e) {
+                    console.log(e.keyCode);
+                   if (e.keyCode === find.code) {
+                        return $scope[spl[1][0]]();
+                   }
+                }
+            } else {
+                throw new Error("You have an error in your expression");
             }
         } else {
-            throw new Error("You have an error in your expression");
+            var term = spl[0],
+                find = $events.find(term);
+
+            if(find && typeof toRun === "function") {  
+                this.selected.onkeypress = function(e) {
+                   if (e.keyCode === find.code) {
+                        return toRun(e);
+                   }
+                }
+            } else {
+                throw new Error("You have an error in your expression");
+            }
         }
     },
     template: function(input, template) {

@@ -16,11 +16,14 @@
       $scope.test = function(){
         console.log("im running son!");
       };
+
+      $(".input").keypress("enter", $scope.test);
+
     });
   </script>
 </head>
 <body class="hello">
-  <input class="input" type="text" data-keypress="space: test()"/>
+  <input class="input" type="text"/> <!-- data-keypress="space: test()" -->
   <h2>First template</h2>
   <div data-template="templates/test.html"></div>
   <h2>Second template</h2>
