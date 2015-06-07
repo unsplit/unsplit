@@ -5,16 +5,6 @@
   <script src="http://generator.unspl.it/?core,ajax,page,mustache"></script>
   <script>
     $(document).ready(function() {
-
-      page.base('/album');
-      page('/', '/photos/0');
-
-      page('/photos/:page', photos);
-
-      function photos(ctx) {
-        console.log(ctx);
-      }
-
       $scope.games = [{
         name: "resident evil"
       }];
@@ -22,10 +12,15 @@
       $scope.buyit = [{
         name: "really does work"
       }];
+
+      $scope.test = function(){
+        console.log("im running son!");
+      };
     });
   </script>
 </head>
 <body class="hello">
+  <input class="input" type="text" data-keypress="space: test()"/>
   <h2>First template</h2>
   <div data-template="templates/test.html"></div>
   <h2>Second template</h2>

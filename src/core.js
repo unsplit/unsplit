@@ -15,13 +15,31 @@ var $browser = {
 
 var $scope = {};
 
+var $events = {
+    terms: [{
+        "name": "enter",
+        "code": 13
+    }, {
+        "name": "space",
+        "code": 32
+    }],
+    find: function(term) {
+        for (var i = this.terms.length - 1; i >= 0; i--) {
+            if(this.terms[i].name === term){
+                return this.terms[i];
+            }
+        };
+    }
+};
+
 var $element = {
     selected: {},
     ready: function(onLoad) {
         window.onload = function() {
             onLoad();
 
-            var templates = document.querySelectorAll('[data-template]');
+            var keysPressed = document.querySelectorAll('[data-keypress]'),
+                templates = document.querySelectorAll('[data-template]');
 
             for (i = 0; i < templates.length; i++) {
                 var template = $(templates[i]),
@@ -32,6 +50,15 @@ var $element = {
                     template.template($scope, contents);
                 });
             }
+
+            for (i = 0; i < keysPressed.length; i++) {
+                var kp = $(keysPressed[i]),
+                    attrs = kp.attributes(),
+                    expression = attrs["data-keypress"].value;
+
+                    kp.keypress(expression);
+            }
+
         }
     },
     attr: function (value, newValue) {
@@ -135,6 +162,28 @@ var $element = {
         //ga('send', 'event', category, 'click', label, value);
         console.log("send", "event", category, "click", label, value);
         return this;
+    },
+    keypress: function(expression) {
+        var spl = expression.split(":");
+
+        for (var i = spl.length - 1; i >= 0; i--) {
+            spl[i] = spl[i].replace(/\s+/g, ''); 
+            spl[i] = spl[i].split("(");
+        };
+
+        var term = spl[0][0],
+            find = $events.find(term);
+
+        if(find && typeof $scope[spl[1][0]] === "function") {  
+            this.selected.onkeypress = function(e) {
+                console.log(e.keyCode);
+               if (e.keyCode === find.code) {
+                    return $scope[spl[1][0]]();
+               }
+            }
+        } else {
+            throw new Error("You have an error in your expression");
+        }
     },
     template: function(input, template) {
         if(typeof Handlebars === "undefined") {
