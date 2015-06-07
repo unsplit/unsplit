@@ -4,6 +4,9 @@ node_js:
 - '0.10'
 - '0.12'
 - 'iojs'
+addons:
+  code_climate:
+    repo_token: 70bf1755b7823ea19d6ccf000a22e73b3503fbd546c7060cf19014d9caa7369e
 notifications:
   webhooks:
     urls:
