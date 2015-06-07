@@ -64,18 +64,21 @@ var $element = {
 
                 for (s = 0; s < scope.length; s++) {
                     repeat.append(temp);
-                };
 
-                var holder;
+
+                var holder,
+                    testing;
 
                 for (c = 0; c < repeats[i].childNodes.length; c++) {
                     if(repeats[i].childNodes[c].nodeName == repeats[i].nodeName) {
                         if(c === 1) {
-                            holder = repeats[i].childNodes[c].outerHTML;
+                            holder = Mustache.render(repeats[i].childNodes[c].outerHTML, scope[s]);
                         } else {
-                            holder += repeats[i].childNodes[c].outerHTML;
+                            holder += Mustache.render(repeats[i].childNodes[c].outerHTML, scope[s]);
                         }
                     }
+                };
+
                 };
 
                 repeats[i].outerHTML = holder;
@@ -170,7 +173,7 @@ var $element = {
     },
     click: function(toRun) {
         this.selected.onclick = function(e) {
-            console.log(e.preventDefault());
+            e.preventDefault();
             toRun();
         };
         return this;
