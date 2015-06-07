@@ -140,19 +140,37 @@ $(document).ready(function(){
    $scope.games = [{
      name: "resident evil"
    }];
+   $scope.test = function() {
+     console.log("im running son!");
+   };
 });
 ```
-##### HTML:
+#### data-template
+Request a template via url, this is handy for keeping your code in small chunks.
 ```html
 <div data-template="templates/test.html"></div>
-```
 
-###### templates/test.html
-
-```html
+<!-- templates/test.html -->
 {{#games}}
 * {{name}}
 {{/games}}
+```
+
+#### data-repeat
+
+Repeat the DOM element by an array/object
+
+```html
+<div data-repeat="game in games">
+  {{name}}
+</div>
+```
+
+#### data-keypress
+On a particular keypress, run a function in the scope
+
+```html
+<input type="text" data-keypress="enter: test()"/>
 ```
 
 #### more coming soon!
