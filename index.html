@@ -7,6 +7,10 @@
     $(document).ready(function() {
       $scope.games = [{
         name: "resident evil"
+      }, {
+        name: "another game"
+      }, {
+        name: "just to test"
       }];
 
       $scope.buyit = [{
@@ -17,14 +21,17 @@
         console.log("im running son!");
       };
 
-      $(".input").keypress("enter", $scope.test);
+      //(".input").repeat($scope.games, function(game) {
+        //console.log(game);
+      //});
 
     });
   </script>
 </head>
 <body class="hello">
-  <input class="input" type="text"/> <!-- data-keypress="space: test()" -->
-  <h2>First template</h2>
+<div class="input" data-repeat="game in games">
+  hello there
+</div>
   <div data-template="templates/test.html"></div>
   <h2>Second template</h2>
   <div data-template="templates/another_test.html"></div>

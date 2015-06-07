@@ -39,6 +39,7 @@ var $element = {
             onLoad();
 
             var keysPressed = document.querySelectorAll('[data-keypress]'),
+                repeats = document.querySelectorAll('[data-repeat]'),
                 templates = document.querySelectorAll('[data-template]');
 
             for (i = 0; i < templates.length; i++) {
@@ -49,7 +50,43 @@ var $element = {
                 $ajax.get(url).success(function(contents) {
                     template.template($scope, contents);
                 });
-            }
+            };
+
+            for (i = 0; i < repeats.length; i++) {
+                var repeat = $(repeats[i]),
+                    attrs  = repeat.attributes(),
+                    val    = attrs["data-repeat"].value,
+                    data   = val.split(" in "),
+                    item   = data[0],
+                    obj    = data[1],
+                    scope  = $scope[obj],
+                    temp   = repeats[i].outerHTML;
+
+                for (s = 0; s < scope.length; s++) {
+                    repeat.append(temp);
+                };
+
+                var holder;
+
+                for (c = 0; c < repeats[i].childNodes.length; c++) {
+                    if(repeats[i].childNodes[c].nodeName == repeats[i].nodeName) {
+                        if(c === 1) {
+                            //console.log(c);
+                            holder = repeats[i].childNodes[c].outerHTML;
+                            //repeats[i].outerHTML += repeats[i].childNodes[c].outerHTML;
+                            //console.log(repeats[i].childNodes[c].outerHTML);
+                        } else {
+                            //console.log(c);
+                            //console.log(repeats[i].outerHTML);
+                            holder += repeats[i].childNodes[c].outerHTML;
+                            //repeats[i].outerHTML += repeats[i].childNodes[c].outerHTML;
+                        }
+                    }
+                };
+
+                repeats[i].outerHTML = holder;
+
+            };
 
             for (i = 0; i < keysPressed.length; i++) {
                 var kp = $(keysPressed[i]),
@@ -57,7 +94,7 @@ var $element = {
                     expression = attrs["data-keypress"].value;
 
                     kp.keypress(expression);
-            }
+            };
 
         }
     },
@@ -98,6 +135,17 @@ var $element = {
         this.selected.innerHTML += item;
         return this;
     },
+    position: function () {
+        var xPosition = 0;
+        var yPosition = 0;
+      
+        while(this.selected) {
+            xPosition += (this.selected.offsetLeft - this.selected.scrollLeft + this.selected.clientLeft);
+            yPosition += (this.selected.offsetTop - this.selected.scrollTop + this.selected.clientTop);
+            this.selected = this.selected.offsetParent;
+        }
+        return { x: xPosition, y: yPosition };
+    },
     html: function (newHTML) {
         if(newHTML) {
             this.selected.innerHTML = newHTML;
@@ -127,7 +175,9 @@ var $element = {
         return this;
     },
     click: function(toRun) {
-        this.selected.onclick = toRun;
+        this.selected.onclick = function() { 
+            toRun();
+        };
         return this;
     },
     fadeIn: function () {
@@ -161,6 +211,18 @@ var $element = {
     ga: function(category, label, value) {
         //ga('send', 'event', category, 'click', label, value);
         console.log("send", "event", category, "click", label, value);
+        return this;
+    },
+    parent: function() {
+        this.selected = this.selected.parentNode;
+        return this;
+    },
+    repeat: function(repeatBy, toRun) {
+        var elem = this.parent().position(),
+        nearest = document.elementFromPoint(elem.x, elem.y);
+
+        console.log(nearest.childNodes);
+        //console.log(nearest.insertBefore(document.createElement('div')).textContent='spaghetti');
         return this;
     },
     keypress: function(expression, toRun) {
