@@ -93,6 +93,13 @@ To change the html
 $(".hello").html("New html");
 ```
 
+#### .position()
+```javascript
+var pos = $(".middle").position();
+
+console.log(pos.x, pos.xy);
+```
+
 #### .attr()
 To recieve the attribute's value: 
 ```javascript
