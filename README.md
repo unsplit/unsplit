@@ -41,7 +41,7 @@ http://generator.unspl.it/?core,ajax,handlebars
 
 ## API
 
-###$(element)
+### $( element )
 Pass through an element such as ```document``` or query based on CSS selectors.
 
 ##### Example:
@@ -52,7 +52,7 @@ $(".main")
 $("[name=woo]")
 ```
 
-#### .ready()
+#### .ready( function )
 
 Specify a function to execute when the DOM is fully loaded.
 
@@ -65,24 +65,24 @@ $(document).ready(function(){
 });
 ```
 
-#### .addClass()
+#### .addClass( newClass )
 ```javascript
 $(".hello").addClass("wooo");
 ```
 
-#### .removeClass()
+#### .removeClass( currentClass )
 ```javascript
 $(".hello").removeClass("wooo");
 ```
 
-#### .click()
+#### .click( function )
 ```javascript
 $(".buttonToClick").click(function(e) {
   // do whatever
 });
 ```
 
-#### .html()
+#### .html( newHTML )
 To recieve the html:
 ```javascript
 $(".hello").html();
@@ -100,7 +100,7 @@ var pos = $(".middle").position();
 console.log(pos.x, pos.y);
 ```
 
-#### .attr()
+#### .attr( attribute, value )
 To recieve the attribute's value: 
 ```javascript
 $(".hello").attr("name");
@@ -111,12 +111,12 @@ To change the value:
 $(".hello").attr("name", "Michael");
 ```
 
-#### .hasClass()
+#### .hasClass( class )
 ```javascript
 $(".hello").hasClass("there");
 ```
 
-#### .append()
+#### .append( string )
 Insert text or HTML
 ```javascript
 $(".hello").append("new text");
@@ -128,7 +128,7 @@ $(".hello").append("<div><i>new</i> <b>html</b></div>");
 
 ### $ajax
 
-#### .get()
+#### .get( url )
 
 ```javascript
 $ajax.get("http://unspl.it/package.json").success(function(data){
@@ -163,7 +163,7 @@ Request a template via url, this is handy for keeping your code in small chunks.
 {{/games}}
 ```
 
-#### data-repeat
+#### data-repeat (in development)
 
 Repeat the DOM element by an array/object
 
@@ -188,7 +188,7 @@ supported within the core:
 
 | Name | Status | Website | API |
 |-------------|---------------|--------------------------|---------------------------------------|
-| Mustache | development | http://mustache.github.io/ | ```$("#container").template(html)```|
-| Handlebars | development | http://handlebarsjs.com/ | ```$("#container").template(html)```|
-| Google Analytics | development | [http://developers.google.com](https://developers.google.com/analytics/devguides/collection/analyticsjs/) | ```ga(category, label, value)``` |
+| Mustache | development | http://mustache.github.io/ | ```.template(html)```|
+| Handlebars | development | http://handlebarsjs.com/ | ```.template(html)```|
+| Google Analytics | development | [http://developers.google.com](https://developers.google.com/analytics/devguides/collection/analyticsjs/) | ```.ga(category, label, value)``` |
 
