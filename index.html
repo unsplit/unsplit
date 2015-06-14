@@ -4,30 +4,35 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <script src="http://generator.unspl.it/?core,ajax,page,mustache"></script>
   <script>
-    $(document).ready(function() {
+  $(document).module(function() {
 
-   $scope.games = [{
-     name: "resident evil",
-     tags: [{
-        name: "Playstation"
-     }, {
-        name: "Xbox"
-     }],
-   }];
-
-      $scope.buyit = [{
-        name: "really does work"
+    $("body").controller({
+      url: "/",
+      view: "templates/test.html"
+    }, function($scope) {
+      $scope.games = [{
+         name: "resident evil",
+         tags: [{
+           name: "Playstation"
+         }, {
+           name: "Xbox"
+         }],
       }];
+
+      $scope.state = "";
+      $scope.howdy = "";
 
       $scope.test = function(){
         console.log("im running son!");
       };
-
     });
+
+  });
   </script>
 </head>
 <body class="hello">
-
+  <input type="checkbox" data-model="state"/>
+  <input type="text" data-model="howdy"/>
   <ul>
     <li class="input" data-repeat="games">
       {{name}}
@@ -37,14 +42,6 @@
       {{/tags}}
     </li>
   </ul>
-
-  <ul>
-    <li class="input" data-repeat="game in buyit">
-      {{name}}
-      {{description}}
-    </li>
-  </ul>
-
   <div data-template="templates/test.html"></div>
   <h2>Second template</h2>
   <div data-template="templates/another_test.html"></div>

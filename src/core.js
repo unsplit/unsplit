@@ -13,8 +13,6 @@ var $browser = {
     }
 };
 
-var $scope = {};
-
 var $events = {
     terms: [{
         "name": "enter",
@@ -34,48 +32,67 @@ var $events = {
 
 var $element = {
     selected: {},
-    ready: function(onLoad) {
+    module: function(onLoad) {
         window.onload = function() {
+
             onLoad();
 
-            var keysPressed = document.querySelectorAll('[data-keypress]'),
-                repeats = document.querySelectorAll('[data-repeat]'),
-                templates = document.querySelectorAll('[data-template]');
-
-            for (i = 0; i < templates.length; i++) {
-                var template = $(templates[i]),
-                    attrs = template.attributes(),
-                    url   = attrs["data-template"].value;
-
-                $ajax.get(url).success(function(contents) {
-                    template.template($scope, contents);
-                });
-            };
-
-            for (i = 0; i < repeats.length; i++) {
-                var repeat = $(repeats[i]),
-                    attrs  = repeat.attributes(),
-                    val    = attrs["data-repeat"].value,
-                    scope  = $scope[val],
-                    holder;
-
-                for (s = 0; s < scope.length; s++) {
-                    holder += Mustache.render(repeats[i].outerHTML, scope[s]);
-                };
-
-                repeats[i].outerHTML = holder.split("undefined")[1];
-
-            };
-
-            for (i = 0; i < keysPressed.length; i++) {
-                var kp = $(keysPressed[i]),
-                    attrs = kp.attributes(),
-                    expression = attrs["data-keypress"].value;
-
-                    kp.keypress(expression);
-            };
-
         }
+    },
+    controller: function(settings, toRun) {
+
+        var $scope = [];
+
+        toRun($scope);
+
+        var keysPressed = this.selected.querySelectorAll('[data-keypress]'),
+            models = this.selected.querySelectorAll('[data-model]'),
+            repeats = this.selected.querySelectorAll('[data-repeat]'),
+            templates = this.selected.querySelectorAll('[data-template]');
+
+       for (i = 0; i < templates.length; i++) {
+            var template = $(templates[i]),
+                attrs = template.attributes(),
+                url   = attrs["data-template"].value;
+
+            $ajax.get(url).success(function(contents) {
+                template.template($scope, contents);
+            });
+        };
+
+        for (i = 0; i < models.length; i++) {
+            var mod = $(models[i]),
+                attrs = mod.attributes(),
+                model = attrs["data-model"].value;  
+
+                $scope = mod.watch($scope, model);
+
+        };
+
+        for (i = 0; i < repeats.length; i++) {
+            var repeat = $(repeats[i]),
+                attrs  = repeat.attributes(),
+                val    = attrs["data-repeat"].value,
+                scope  = $scope[val],
+                holder;
+
+            for (s = 0; s < scope.length; s++) {
+                scope[s]["$index"] = s;
+                holder += Mustache.render(repeats[i].outerHTML, scope[s]);
+            };
+
+            repeats[i].outerHTML = holder.split("undefined")[1];
+
+        };
+
+        for (i = 0; i < keysPressed.length; i++) {
+            var kp = $(keysPressed[i]),
+                attrs = kp.attributes(),
+                expression = attrs["data-keypress"].value;
+
+                kp.keypress(expression);
+        };
+
     },
     attr: function (value, newValue) {
         for (i = 0; i < this.selected.attributes.length; i++) {
@@ -203,46 +220,76 @@ var $element = {
 
         return this;
     },
-    keypress: function(expression, toRun) {
-        var spl = expression.split(":");
+    watch: function(scope, model) {
 
-        if(spl.length > 1) {
-            for (var i = spl.length - 1; i >= 0; i--) {
-                spl[i] = spl[i].replace(/\s+/g, ''); 
-                spl[i] = spl[i].split("(");
+        if(this.selected.type == "checkbox") {
+            this.selected.onclick = function(e){
+                if(scope[model] !== true) {
+                    scope[model] = true;
+                } else {
+                    scope[model] = false;
+                }
+            };
+        } else {
+            this.selected.onkeypress = function(e){
+                scope[model] = e.target.value;
             };
 
-            var term = spl[0][0],
-                find = $events.find(term);
+            this.selected.onchange = function(e){
+                scope[model] = e.target.value;
+            };
+        }
 
-            if(find && typeof $scope[spl[1][0]] === "function") {  
-                this.selected.onkeypress = function(e) {
-                   if (e.keyCode === find.code) {
-                        return $scope[spl[1][0]]();
-                   }
+        return scope;
+
+    },
+    keypress: function(expression, toRun) {
+        if(expression !== undefined) {
+            var spl = expression.split(":");
+
+            if(spl.length > 1) {
+                for (var i = spl.length - 1; i >= 0; i--) {
+                    spl[i] = spl[i].replace(/\s+/g, ''); 
+                    spl[i] = spl[i].split("(");
+                };
+
+                var term = spl[0][0],
+                    find = $events.find(term);
+
+                if(find && typeof $scope[spl[1][0]] === "function") {  
+                    this.selected.onkeypress = function(e) {
+                       if (e.keyCode === find.code) {
+                            return $scope[spl[1][0]]();
+                       }
+                    }
+                } else {
+                    throw new Error("You have an error in your expression");
                 }
             } else {
-                throw new Error("You have an error in your expression");
+                var term = spl[0],
+                    find = $events.find(term);
+
+                if(find && typeof toRun === "function") {  
+                    this.selected.onkeypress = function(e) {
+                       if (e.keyCode === find.code) {
+                            return toRun(e);
+                       }
+                    }
+                } else {
+                    throw new Error("You have an error in your expression");
+                }
             }
         } else {
-            var term = spl[0],
-                find = $events.find(term);
-
-            if(find && typeof toRun === "function") {  
-                this.selected.onkeypress = function(e) {
-                   if (e.keyCode === find.code) {
-                        return toRun(e);
-                   }
-                }
-            } else {
-                throw new Error("You have an error in your expression");
-            }
+            this.selected.onkeypress = function(e) {
+                console.log(e);
+            }   
         }
     },
     template: function(input, template) {
         if(typeof Handlebars === "undefined") {
             if(typeof input !== "object") {
                 if(template) {
+
                     var complied = Mustache.render(template, {data: input});
                     //var compiled = Handlebars.compile(template);
                     this.selected.innerHTML += complied;
@@ -251,6 +298,7 @@ var $element = {
                 }
             } else {
                 if(/<[a-z][\s\S]*>/i.test(input.template)) {
+
                     var compiled = Mustache.render(input.template, { data: input.data });
                     this.selected.innerHTML += compiled;
                 } else {
