@@ -145,8 +145,14 @@ $ajax.get("http://unspl.it/package.json").success(function(data){
 ```javascript
 $(document).ready(function(){
    $scope.games = [{
-     name: "resident evil"
+     name: "resident evil",
+     tags: [{
+	name: "Playstation"
+     }, {
+	name: "Xbox"
+     }],
    }];
+
    $scope.test = function() {
      console.log("im running son!");
    };
@@ -168,8 +174,15 @@ Request a template via url, this is handy for keeping your code in small chunks.
 Repeat the DOM element by an array/object
 
 ```html
-<div data-repeat="game in games">
-  {{name}}
+<div data-repeat="games">
+  <h2>{{name}}</h2>
+  <ul>
+    {{#tags}}
+    <li>
+      {{name}}
+    </li>
+    {{/tags}}
+  </ul>
 </div>
 ```
 

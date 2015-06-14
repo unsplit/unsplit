@@ -5,13 +5,15 @@
   <script src="http://generator.unspl.it/?core,ajax,page,mustache"></script>
   <script>
     $(document).ready(function() {
-      $scope.games = [{
-        name: "resident evil"
-      }, {
-        name: "another game"
-      }, {
-        name: "just to test"
-      }];
+
+   $scope.games = [{
+     name: "resident evil",
+     tags: [{
+        name: "Playstation"
+     }, {
+        name: "Xbox"
+     }],
+   }];
 
       $scope.buyit = [{
         name: "really does work"
@@ -25,9 +27,24 @@
   </script>
 </head>
 <body class="hello">
-<div class="input" data-repeat="game in games">
-  {{name}}
-</div>
+
+  <ul>
+    <li class="input" data-repeat="games">
+      {{name}}
+      {{description}}
+      {{#tags}}
+        {{name}}
+      {{/tags}}
+    </li>
+  </ul>
+
+  <ul>
+    <li class="input" data-repeat="game in buyit">
+      {{name}}
+      {{description}}
+    </li>
+  </ul>
+
   <div data-template="templates/test.html"></div>
   <h2>Second template</h2>
   <div data-template="templates/another_test.html"></div>

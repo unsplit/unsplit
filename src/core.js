@@ -56,32 +56,14 @@ var $element = {
                 var repeat = $(repeats[i]),
                     attrs  = repeat.attributes(),
                     val    = attrs["data-repeat"].value,
-                    data   = val.split(" in "),
-                    item   = data[0],
-                    obj    = data[1],
-                    scope  = $scope[obj],
-                    temp   = repeats[i].outerHTML;
+                    scope  = $scope[val],
+                    holder;
 
                 for (s = 0; s < scope.length; s++) {
-                    repeat.append(temp);
-
-
-                var holder,
-                    testing;
-
-                for (c = 0; c < repeats[i].childNodes.length; c++) {
-                    if(repeats[i].childNodes[c].nodeName == repeats[i].nodeName) {
-                        if(c === 1) {
-                            holder = Mustache.render(repeats[i].childNodes[c].outerHTML, scope[s]);
-                        } else {
-                            holder += Mustache.render(repeats[i].childNodes[c].outerHTML, scope[s]);
-                        }
-                    }
+                    holder += Mustache.render(repeats[i].outerHTML, scope[s]);
                 };
 
-                };
-
-                repeats[i].outerHTML = holder;
+                repeats[i].outerHTML = holder.split("undefined")[1];
 
             };
 
