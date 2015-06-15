@@ -32,7 +32,7 @@ var $events = {
 
 var $element = {
     selected: {},
-    module: function(onLoad) {
+    module: function(arr, onLoad) {
         window.onload = function() {
 
             onLoad();

@@ -52,18 +52,41 @@ $(".main")
 $("[name=woo]")
 ```
 
-#### .ready( function )
+#### .module( modules, function(module) )
 
-Specify a function to execute when the DOM is fully loaded.
+Include other modules here. (coming soon)
 
 ##### Example:
 
 ```javascript
-$(document).ready(function(){
-  // Document has loaded
-  console.log("i'm awake");
+$(document).module(['ui'], function($ui){
+
+// module has loaded
+
 });
 ```
+
+#### .controller( settings, function(components) )
+
+Configure and initialize a controller. (coming soon)
+
+##### Example:
+
+```javascript
+$(document).module(['ui'], function($ui){
+
+  $("body").controller({
+    url: "/",
+    view: "templates/test.html"
+  }, function($scope, $ajax) {
+
+    //controller has loaded
+
+  });
+
+});
+```
+
 
 #### .addClass( newClass )
 ```javascript
@@ -143,21 +166,36 @@ $ajax.get("http://unspl.it/package.json").success(function(data){
 #### initialization
 
 ```javascript
-$(document).ready(function(){
-   $scope.games = [{
-     name: "resident evil",
-     tags: [{
-	name: "Playstation"
-     }, {
-	name: "Xbox"
-     }],
-   }];
+$(document).module(['ui'], function($ui){
 
-   $scope.test = function() {
-     console.log("im running son!");
-   };
+  $("body").controller({
+    url: "/",
+    view: "templates/test.html"
+  }, function($scope, $ajax) {
+
+    //controller has loaded
+
+    $scope.games = [{
+       name: "resident evil",
+       tags: [{
+          name: "Playstation"
+       }, {
+          name: "Xbox"
+       }],
+    }];
+
+    $scope.state = "";
+    $scope.howdy = "";
+
+    $scope.test = function(){
+      console.log("im running son!");
+    };
+
+  });
+
 });
 ```
+
 #### data-template
 Request a template via url, this is handy for keeping your code in small chunks.
 ```html

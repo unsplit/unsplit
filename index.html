@@ -4,27 +4,29 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <script src="http://generator.unspl.it/?core,ajax,page,mustache"></script>
   <script>
-  $(document).module(function() {
+  $(document).module([], function() {
 
     $("body").controller({
       url: "/",
       view: "templates/test.html"
     }, function($scope) {
-      $scope.games = [{
+
+        $scope.games = [{
          name: "resident evil",
          tags: [{
            name: "Playstation"
          }, {
            name: "Xbox"
          }],
-      }];
+        }];
 
-      $scope.state = "";
-      $scope.howdy = "";
+        $scope.state = "";
+        $scope.howdy = "";
 
-      $scope.test = function(){
+        $scope.test = function(){
         console.log("im running son!");
-      };
+        };
+
     });
 
   });
